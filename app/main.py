@@ -36,7 +36,7 @@ def check_password(hash_password: str) -> None:
 def brute_force_password(passwords_hash: List[str]) -> None:
     futures = []
 
-    with ProcessPoolExecutor(multiprocessing.cpu_count() - 1) as executor:
+    with ProcessPoolExecutor(max_workers=multiprocessing.cpu_count() - 1) as executor:
         for hash_password in passwords_hash:
             futures.append(
                 executor.submit(check_password, hash_password)
